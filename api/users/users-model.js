@@ -38,6 +38,7 @@ function findById(user_id) {
       "u.username",
       "r.role_name"
     ).where("u.user_id", user_id)
+    .first()
 }
 
 /**
