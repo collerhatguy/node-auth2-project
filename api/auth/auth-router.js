@@ -5,11 +5,13 @@ const tokenBuilder = require("../auth/token-builder")
 const bcrypt = require("bcryptjs")
 
 router.post("/register", validateRoleName, (req, res, next) => {
-  const { body } = req
-  const hash = bcrypt.hashSync(body.password, 8)
+  const { body, role_name } = req
+  const { username, password } = body
+  const hash = bcrypt.hashSync(password, 8)
 
   add({
-    ...body,
+    username,
+    role_name,
     password: hash
   }).then(account => 
     res.status(201).json(account)
